@@ -29,6 +29,8 @@ JSTAT_TEMP=/var/tmp/jstat.tomcat
 THREADDUMP_TEMP=/var/tmp/threaddump.tomcat
 NETSTAT_TEMP=/var/tmp/netstat.tomcat
 
+AJP_PORT=8009
+DB_PORT=1433
 
 SLEEP_TIME=15
 
@@ -98,9 +100,9 @@ function load() {
 
      netstat -an > $NETSTAT_TEMP
 
-     ajp_estab=$(grep 8009 $NETSTAT_TEMP | grep -i estab | wc -l)
-     ajp_timewait=$(grep 8009 $NETSTAT_TEMP | grep -i wait | wc -l)
-     db_estab=$(grep 1433 $NETSTAT_TEMP | grep -i estab | wc -l)
+     ajp_estab=$(grep $AJP_PORT $NETSTAT_TEMP | grep -i estab | wc -l)
+     ajp_timewait=$(grep $AJP_PORT $NETSTAT_TEMP | grep -i wait | wc -l)
+     db_estab=$(grep $DB_PORT $NETSTAT_TEMP | grep -i estab | wc -l)
 
      # JVM memory 
      
