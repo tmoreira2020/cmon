@@ -39,7 +39,8 @@ function usage() {
 
 function load() {
 
-  HEADER="Date/Time;Load;AjpEst;AjpTw;MySQLEst;Young(%);Old(%);Perm(%);YGC(#);FGC(#);Threads(#);ThRun(%);ThBlk(%);ThTw(%)\n"
+
+  HEADER="Date/Time;Load;AjpEst;AjpTw;DBEst;Young(%);Old(%);Perm(%);YGC(#);FGC(#);Threads(#);ThRun(%);ThBlk(%);ThTw(%)\n"
 
   last_load=0
   count=0
@@ -47,6 +48,7 @@ function load() {
 
      now=`date '+%d/%m/%Y %H:%M:%S'`
      today=`date '+%Y%m%d'`
+     
      catalina_pid=$(jps | grep -i bootstrap | awk '{print $1}') 
 
      if [ -z "$(uname | grep Darwin)" ]; then
@@ -87,7 +89,7 @@ function load() {
 
      ajp_estab=$(grep 8009 $NETSTAT_TEMP | grep -i estab | wc -l)
      ajp_timewait=$(grep 8009 $NETSTAT_TEMP | grep -i wait | wc -l)
-     mysql_estab=$(grep 1433 $NETSTAT_TEMP | grep -i estab | wc -l)
+     db_estab=$(grep 1433 $NETSTAT_TEMP | grep -i estab | wc -l)
 
      # JVM memory 
      
@@ -127,7 +129,7 @@ function load() {
                  "$load;" \
                  "$ajp_estab;" \
                  "$ajp_timewait;" \
-                 "$mysql_estab;" \
+                 "$db_estab;" \
                  "$jvm_eden;" \
                  "$jvm_old;" \
                  "$jvm_perm;" \
