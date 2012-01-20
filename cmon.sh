@@ -25,8 +25,8 @@ CATALINA_HOME=/usr/local/liferay/tomcat
 CATALINA_STAT=$LOGDIR/cmon
 THREADDUMP_STAT=$LOGDIR/threaddump
 
-JSTAT_TEMP=/var/tmp/jstat.ale
-THREADDUMP_TEMP=/var/tmp/threaddump.ale
+JSTAT_TEMP=/var/tmp/jstat.tomcat
+THREADDUMP_TEMP=/var/tmp/threaddump.tomcat
 
 function usage() {
    
