@@ -29,6 +29,9 @@ JSTAT_TEMP=/var/tmp/jstat.tomcat
 THREADDUMP_TEMP=/var/tmp/threaddump.tomcat
 NETSTAT_TEMP=/var/tmp/netstat.tomcat
 
+
+SLEEP_TIME=15
+
 function usage() {
    
    echo
@@ -175,7 +178,7 @@ function load() {
      #
      last_load=$load
 
-     sleep 15
+     sleep $SLEEP_TIME
   done
 }
 
