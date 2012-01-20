@@ -27,6 +27,7 @@ THREADDUMP_STAT=$LOGDIR/threaddump
 
 JSTAT_TEMP=/var/tmp/jstat.tomcat
 THREADDUMP_TEMP=/var/tmp/threaddump.tomcat
+NETSTAT_TEMP=/var/tmp/netstat.tomcat
 
 function usage() {
    
@@ -82,9 +83,11 @@ function load() {
 
      # Networkd conections
 
-     ajp_estab=$(netstat -an | grep 8009 | grep -i estab | wc -l)
-     ajp_timewait=$(netstat -an | grep 8009 | grep -i wait | wc -l)
-     mysql_estab=$(netstat -an | grep 3306 | grep -i estab | wc -l)
+     netstat -an > $NETSTAT_TEMP
+
+     ajp_estab=$(grep 8009 $NETSTAT_TEMP | grep -i estab | wc -l)
+     ajp_timewait=$(grep 8009 $NETSTAT_TEMP | grep -i wait | wc -l)
+     mysql_estab=$(grep 1433 $NETSTAT_TEMP | grep -i estab | wc -l)
 
      # JVM memory 
      
