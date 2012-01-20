@@ -90,7 +90,7 @@ function load() {
 	 #
 	 if [ $(echo "$load_diff > 15" | bc) -eq 1 ]; then 
 
-		cp $THREADDUMP_TEMP $THREADDUMP_STAT.$(date +%Y%m%d%H%M).JustBeforeLoadPeak.$(hostname).txt
+		cat $THREADDUMP_TEMP >> $THREADDUMP_STAT.$(date +%Y%m%d%H%M).JustBeforeLoadPeak.$(hostname).txt
 		
 	 fi
 
@@ -165,7 +165,7 @@ function load() {
 
      overloaded=$(echo "$load > ${THRESHOLD}" | bc) 
      if [[ "$overloaded" -eq "1" ]]; then
-        cp $THREADDUMP_TEMP $THREADDUMP_STAT.$(date +%Y%m%d%H%M).$(hostname).txt
+        cat $THREADDUMP_TEMP >> $THREADDUMP_STAT.$(date +%Y%m%d%H%M).$(hostname).txt
      fi
 
 	 #
