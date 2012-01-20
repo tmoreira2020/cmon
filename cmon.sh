@@ -39,6 +39,16 @@ function usage() {
 
 function load() {
 
+  catalina_pid=$(jps | grep -i bootstrap | awk '{print $1}') 
+
+  uid=$(ps -p $catalina_pid -o euid=)
+
+  if [ $(echo "$uid != $UID" | bc) -eq 1 ]; then 
+    echo
+    echo "You must invoke cmon using the same user used to invoke Tomcat."
+    echo
+    exit -1
+  fi
 
   HEADER="Date/Time;Load;AjpEst;AjpTw;DBEst;Young(%);Old(%);Perm(%);YGC(#);FGC(#);Threads(#);ThRun(%);ThBlk(%);ThTw(%)\n"
 
@@ -49,8 +59,6 @@ function load() {
      now=`date '+%d/%m/%Y %H:%M:%S'`
      today=`date '+%Y%m%d'`
      
-     catalina_pid=$(jps | grep -i bootstrap | awk '{print $1}') 
-
      if [ -z "$(uname | grep Darwin)" ]; then
         # Linux
         load=$(cat /proc/loadavg | awk '{print $1}')
@@ -103,11 +111,7 @@ function load() {
 
      # JVM threads
 
-     lines_before=$(cat $CATALINA_HOME/logs/catalina.out | wc -l)  
-     kill -3 $catalina_pid
-     lines_after=$(cat $CATALINA_HOME/logs/catalina.out | wc -l)
-     thread_dump=$(expr $lines_after - $lines_before) 
-     tail -$thread_dump $CATALINA_HOME/logs/catalina.out > $THREADDUMP_TEMP
+     jstack $catalina_pid > $THREADDUMP_TEMP
 
      jvm_threads=$(grep "java.lang.Thread.State" $THREADDUMP_TEMP | wc -l)     
      jvm_th_run=$(grep "java.lang.Thread.State: RUNNABLE" $THREADDUMP_TEMP | wc -l)
