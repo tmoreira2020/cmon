@@ -55,7 +55,7 @@ function load() {
     exit -1
   fi
 
-  HEADER="Date/Time;Load;AjpEst;AjpTw;DBEst;Young(%);Old(%);Perm(%);YGC(#);FGC(#);Threads(#);ThRun(%);ThBlk(%);ThTw(%)\n"
+  HEADER="Date/Time;Load;AjpEst;AjpTw;DBEst($DB_PORT);Young(%);Old(%);Perm(%);YGC(#);FGC(#);Threads(#);ThRun(%);ThBlk(%);ThTw(%)\n"
 
   last_load=0
   count=0
