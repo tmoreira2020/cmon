@@ -25,9 +25,9 @@ CATALINA_HOME=/usr/local/liferay/tomcat
 CATALINA_STAT=$LOGDIR/cmon
 THREADDUMP_STAT=$LOGDIR/threaddump
 
-JSTAT_TEMP=/var/tmp/jstat.tomcat
-THREADDUMP_TEMP=/var/tmp/threaddump.tomcat
-NETSTAT_TEMP=/var/tmp/netstat.tomcat
+JSTAT_TEMP=/tmp/jstat.tomcat
+THREADDUMP_TEMP=/tmp/threaddump.tomcat
+NETSTAT_TEMP=/tmp/netstat.tomcat
 
 AJP_PORT=8009
 DB_PORT=1433
